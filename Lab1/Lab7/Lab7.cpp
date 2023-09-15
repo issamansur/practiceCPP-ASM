@@ -6,33 +6,34 @@ int main()
 	// 5. Write program on c++ and ASM (with inserting)
 	// Compare results
 
+	// Solutions:
+	
 	// for best experience 
 	// 1. will use 'else' in c++
 	// 2. will no use additional check in asm
-
-	// Question: xchg reg1, reg2
 
 	int a = 16;
 	int x = 32;
 	int y, y1, y2;
 	
-	// c++
+
+	// Solution c++
 	if (x < 0)
 		y1 = abs(x);
 	else
-		y1 = x - a;
+		y1 = x - a; // y1=16
 
 	if (x % 3 == 1)
 		y2 = a + x;
 	else
-		y2 = 7;
+		y2 = 7; // y2=7
 
-	y = y1 - y2;
+	y = y1 - y2; // y=9
 
-	cout << y << endl;
+	cout << y << endl; // y=9
 
 
-	// asm
+	// Solution asm
 	__asm {
 		// check 1
 		mov eax, [x]

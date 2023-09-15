@@ -4,17 +4,32 @@ using namespace std;
 int main()
 {
 	// 5. Change values of two variables
-	int one = 16;
-	int two = 32;
-	// eax - 32 bit as int - 2 bytes = 32 bit
+	
+	// solution:
+	
+	// we will use "eax" - 32 bit 
+	// because int - 4 bytes = 32 bit
+
+	// variant 1 (use 2 registers)
+	int one = 16, two = 32;
+
 	__asm {
-		mov eax, [one]
-		// cannot insert from var to var
-		// so use second registr
-		mov ebx, two
-		mov [two], eax
-		mov [one], ebx
+		mov eax, one // eax=16
+		mov ebx, two // ebx=32
+		mov one, ebx // one=32
+		mov two, eax // two=16
 	}
-	cout << "one = " << one << endl;
-	cout << "two = " << two << endl;
+	cout << "one = " << one << endl; // one=32
+	cout << "two = " << two << endl; // two=16
+
+	// variant 2 (use only 1 register)
+	one = 16, two = 32;
+
+	__asm {		
+		mov eax, one // eax=16
+		xchg eax, two // eax=32, two=16
+		mov one, eax // one = 32
+	}
+	cout << "one = " << one << endl; // one=32
+	cout << "two = " << two << endl; // two=16
 }
