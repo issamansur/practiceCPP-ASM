@@ -11,13 +11,12 @@ int main()
 	// for best experience 
 	// 1. will use 'else' in c++
 	// 2. will no use additional check in asm
-
-	int a = 16;
-	int x = 32;
+	
+	// Solution c++
+	int a = 16, x = 32;
 	int y, y1, y2;
 	
 
-	// Solution c++
 	if (x < 0)
 		y1 = abs(x);
 	else
@@ -34,40 +33,49 @@ int main()
 
 
 	// Solution asm
+	a = 16, x = 32;
 	__asm {
-		// check 1
-		mov eax, [x]
-		jl eax, 0 cond1
-		// if x >= 0
-		sub eax, [a]
-		jmp stage2
-		// if x < 0
-			cond1:
-		neg eax
+		// START condition 1
+		cmp a, 0 // a <> 0 ?
+		// if x < 0, then go to 'x_less_than_zero'
+		jl x_less_than_zero
+		// else
+		mov eax, x
+		sub eax, a // eax = x - a
+		mov y1, eax // y1 = eax = x - a
+		jmp condition_2
 
-		// check 2
-			stage2:
-		// save y1
-		mov [y1], eax
+			x_less_than_zero :
+		neg eax // eax = abs(x)
+		// set y1
+		mov y1, eax // y1 = eax = abs(x)
+		// END condition 1
 
-		mov ebx, [x]
-		mov ecx, 3
-		div ecx
+
+		// START condition 2
+			condition_2 :
+		mov eax, x // eax = x
+		mov ecx, 3 // ecx = 3
+		mov edx, 0 // !!! very important to zero EDX
+		div ecx // edx = EDX:eax % ecx = x % 3
 		
-		cmp edx, 1 cond2
-		// if x % 3 != 1
-		mov [y2], 7
-		jmp onend
-		// if x % 3 != 1
-			cond2:
-		mov eax, [a]
-		add eax, [x]
-		mov [y2], eax
-			onend:
-		
-		sub [y1], [y2]
+		cmp edx, 1 // (edx = x % 3) == 1 ?
+		// if x % 3 == 1, then go to 'x_div_3_equal_1'
+		je x_div_3_equal_1
+		// else 
+		mov y2, 7 // y2 = 7
+		jmp on_end
+			x_div_3_equal_1 :
+		mov eax, x // eax = x
+		add eax, a // eax = eax + a = x + a
+		mov y2, eax // y2 = eax = x + a
+		// END condition 2
 
-		mov [y], [y1]
+			on_end:
+		mov eax, y1 // eax = y1
+		sub eax, y2 // eax = eax - y2 = y1 - y2
+
+		mov y, eax // y = eax = y1 - y2
 	}
 	cout << y << endl;
 }
