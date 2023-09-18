@@ -1,4 +1,5 @@
-﻿#include <iostream>
+#include <iostream>
+
 using namespace std;
 
 int main()
@@ -32,23 +33,23 @@ int main()
 		mov ecx, 7 // set needed max value (eax <=> x)
 
 		// START cycle
-	start :
-		mov ebx, 0 // value of func on one step
+		start :
+		xor ebx, ebx // value of func on one step; ebx = 0
 
-		mov eax, ecx // eax = ecx = x
-		mul eax // eax = eax * eax = x^2
-		add ebx, eax // ebx = eax = x^2
+			mov eax, ecx // eax = ecx = x
+			mul eax // eax = eax * eax = x^2
+			add ebx, eax // ebx = eax = x^2
 
-		mov eax, 5 // eax = 5
-		mul ecx // eax = eax * ecx = 5 * x
-		add ebx, eax // ebx = eax = x^2 + 5 * x
-		
-		add ebx, -3 // ebx = x^2 + 5 * x - 3
-		add s, ebx
-		// END cycle
+			mov eax, 5 // eax = 5
+			mul ecx // eax = eax * ecx = 5 * x
+			add ebx, eax // ebx = eax = x^2 + 5 * x
 
-		// cycle condition
-		loop start // decrement ecx -> ecx = ecx - 1
+			add ebx, -3 // ebx = x^2 + 5 * x - 3
+			add s, ebx
+			// END cycle
+
+			// cycle condition
+			loop start // decrement ecx -> ecx = ecx - 1
 	}
 	cout << s << endl;
 }
