@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -52,20 +52,21 @@ int main()
 	__asm {
 		// set counter for looping
 		mov ecx, size_array
-		mov esi, 0
-		// set variable for sum
-		mov eax, 0
+		// lea = load address
+		lea esi, a
+		// set variable for sum; eax = 0
+		xor eax, eax
 
 		// START cycle
-	start:
-		mov eax, [a + esi * 4]
-		add sum, eax
+		start:
+		mov eax, [esi]
+			add sum, eax
 
-		inc esi
-		// END cycle
+			add esi, 4
+			// END cycle
 
-		// cycle condition
-		loop start // decrement ecx -> ecx = ecx - 1
+			// cycle condition
+			loop start // decrement ecx -> ecx = ecx - 1
 	}
 	cout << "Sum: " << sum << endl << endl;
 
@@ -86,25 +87,26 @@ int main()
 	__asm {
 		// set counter for looping
 		mov ecx, size_array
-		mov esi, 0
+		xor esi, esi
 		// set variable for sum
-		mov eax, 0
+		xor eax, eax
 
 		// START cycle
-	start2:
+		start2:
 		fild dword ptr[a + esi * 4]
-		fld qword ptr[average]
-		// fsub = (floating substraction)
-		fsub // FPU = [b2[i]-average, average, b2[i], ...]
-		fabs
-		fstp qword ptr[b2 + esi * 8]
+			fld qword ptr[average]
+			// fsub = (floating substraction)
+			fsub // FPU = [b2[i]-average, average, b2[i], ...]
+			fabs
+			// fstp = float store and pop
+			fstp qword ptr[b2 + esi * 8]
 
 
-		inc esi
-		// END cycle
+			inc esi
+			// END cycle
 
-		// cycle condition
-		loop start2 // decrement ecx -> ecx = ecx - 1
+			// cycle condition
+			loop start2 // decrement ecx -> ecx = ecx - 1
 	}
 
 	cout << "Output array (by asm):" << endl;
