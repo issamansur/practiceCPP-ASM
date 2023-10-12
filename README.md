@@ -155,9 +155,7 @@
 | -      | 02h | Read Keyboard Shift Status                |
 | -      | 05h | Store Keystroke in Keyboard Buffer        |
 | -      | 10h | Read Character Extended                   |
-| -
-
-      | 11h | Read Input Status Extended                |
+| -      | 11h | Read Input Status Extended                |
 | -      | 12h | Read Keyboard Shift Status Extended       |
 | 17h    |    | Printer Services                          |
 | -      | 00h | Print Character to Printer                |
