@@ -87,4 +87,58 @@
 - ![image](https://github.com/issamansur/practiceCPP-ASM/assets/77580844/8c939897-328e-4890-881a-884edcb5a05e)
 
 ### Прерывания <a name="interrupts"></a>
-    
+
+| AH    | Service                         | Description                              |
+|-------|---------------------------------|------------------------------------------|
+| 00h   | Tape drive                      | Turn on tape drive motor                 |
+| 01h   | Tape drive                      | Turn off tape drive motor                |
+| 02h   | Tape drive                      | Read data                                |
+| 03h   | Tape drive                      | Write data                               |
+| 09h   | SYSTEM                          | Error reporting data during POST         |
+| 52h   | INT 13h extensions              | Intercept when media is ejected         |
+| 84h   | Joystick                        | Joystick functions                       |
+| 85h   | SYSTEM                          | Intercept keystroke PetSis               |
+| 86h   | BIOS                            | Wait microsecond interval                |
+| 87h   | SYSTEM                          | Copy extended memory                     |
+| 88h   | SYSTEM                          | Get extended memory size                 |
+| 89h   | SYSTEM                          | Go to protected mode                     |
+| 2400h | SYSTEM                          | Deactivate line A20                      |
+| 2401h | SYSTEM                          | Activate line A20                        |
+| 5300h | APM                             | Check installation                       |
+| 5301h | APM                             | Connect real mode interface              |
+| 5302h | APM                             | Connect 16-bit interface                 |
+| 5303h | APM                             | Connect 32-bit interface                 |
+| 5304h | APM                             | Disconnect interface                     |
+| 5307h | APM                             | Set power state                          |
+| 5307h | APM                             | CX=0001h - Pasar pc a modo STANBY        |
+| 5307h | APM                             | CX=0002h - Suspend system               |
+| 5307h | APM                             | CX=0003h - Erase system                 |
+| 5308h | APM                             | Enable / disable power management        |
+| 5380h | APM                             | BH=04h - Get auto off time               |
+| 5380h | APM                             | BH=05h - Set auto off time               |
+| 5380h | APM                             | BH=0Ch - Get CPU speed mode              |
+| 5380h | APM                             | BH=0Dh - Set CPU speed mode              |
+| C1h   | SYSTEM                          | Get Extended BIOS Data Segment Boot     |
+| C200h | PS / 2 mouse                   | Enable / Disable mouse                   |
+| C201h | PS / 2 mouse                   | Restart mouse                            |
+| C202h | PS / 2 mouse                   | Set sample rate                          |
+| C203h | PS / 2 mouse                   | Set resolution                           |
+| C204h | PS / 2 mouse                   | Get type                                 |
+| C205h | PS / 2 mouse                   | Initialize mouse                         |
+| C206h | PS / 2 mouse                   | Extended commands                        |
+| C207h | PS / 2 mouse                   | Set mouse driver address                 |
+| C208h | PS / 2 mouse                   | Write to mouse port                      |
+| C209h | PS / 2 mouse                   | Read from mouse port                     |
+|-------| Joystick function table         |                                          |
+| 00h   | Joystick                        | Read the four buttons on the joystick   |
+| 01h   | Joystick                        | Read the lever                           |
+| 02h   | Joystick                        | Same as 00h but in values from 0 to 255  |
+| 03h   | Joystick                        | Calibrate the joystick                   |
+| 04h   | Joystick                        | Check if the joystick is calibrated     |
+| 05h   | Joystick                        | Read raw data of the lever               |
+| 08h   | Joystick                        | Read the specified button                |
+| 09h   | Joystick                        | Read all buttons up to button 16         |
+| 80h   | Joystick                        | Remove the driver from memory            |
+| 81h   | Joystick                        | Check if the driver is in memory         |
+
+Обратите внимание, что некоторые службы прерывания INT 15h специфичны для определенных контекстов и функций (например, APM для управления энергосбережением и PS/2 mouse для управления мышью).
