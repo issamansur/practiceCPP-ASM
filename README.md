@@ -88,6 +88,92 @@
 
 ### Прерывания <a name="interrupts"></a>
 
+| Vector | AH  | Description                               |
+|--------|---- |-------------------------------------------|
+| 05h    |    | Executed when Shift-Print screen is pressed, as well as when the BOUND instruction detects a bound failure. |
+| 08h    |    | Real-time clock interrupt. Fires 18.2 times/second. BIOS increments the time-of-day counter during this interrupt. |
+| 09h    |    | Keyboard interrupt, generally triggered when a key on a keyboard is pressed. |
+| 10h    | 00h | Set Video Mode                           |
+| -      | 01h | Set Cursor Shape                         |
+| -      | 02h | Set Cursor Position                      |
+| -      | 03h | Get Cursor Position And Shape            |
+| -      | 04h | Get Light Pen Position                   |
+| -      | 05h | Set Display Page                         |
+| -      | 06h | Clear/Scroll Screen Up                   |
+| -      | 07h | Clear/Scroll Screen Down                 |
+| -      | 08h | Read Character and Attribute at Cursor   |
+| -      | 09h | Write Character and Attribute at Cursor  |
+| -      | 0Ah | Write Character at Cursor                |
+| -      | 0Bh | Set Border Color                         |
+| -      | 0Ch | Write Graphics Pixel                     |
+| -      | 0Dh | Read Graphics Pixel                      |
+| -      | 0Eh | Write Character in TTY Mode              |
+| -      | 0Fh | Get Video Mode                           |
+| -      | 10h | Set Palette Registers (EGA, VGA, SVGA)   |
+| -      | 11h | Character Generator (EGA, VGA, SVGA)     |
+| -      | 12h | Alternate Select Functions (EGA, VGA, SVGA) |
+| -      | 13h | Write String                             |
+| -      | 1Ah | Get or Set Display Combination Code (VGA, SVGA) |
+| -      | 1Bh | Get Functionality Information (VGA, SVGA) |
+| -      | 1Ch | Save or Restore Video State (VGA, SVGA)  |
+| -      | 4Fh | VESA BIOS Extension Functions (SVGA)     |
+| 11h    |    | Returns equipment list                   |
+| 12h    |    | Return conventional memory size          |
+| 13h    |    | Low-Level Disk Services                  |
+| -      | 00h | Reset Disk Drives                        |
+| -      | 01h | Check Drive Status                       |
+| -      | 02h | Read Sectors                             |
+| -      | 03h | Write Sectors                            |
+| -      | 04h | Verify Sectors                           |
+| -      | 05h | Format Track                             |
+| -      | 08h | Get Drive Parameters                     |
+| -      | 09h | Init Fixed Drive Parameters               |
+| -      | 0Ch | Seek To Specified Track                   |
+| -      | 0Dh | Reset Fixed Disk Controller               |
+| -      | 15h | Get Drive Type                           |
+| -      | 16h | Get Floppy Drive Media Change Status     |
+| -      | 17h | Set Disk Type                            |
+| -      | 18h | Set Floppy Drive Media Type              |
+| -      | 41h | Extended Disk Drive (EDD) Installation Check |
+| -      | 42h | Extended Read Sectors                    |
+| -      | 43h | Extended Write Sectors                   |
+| -      | 44h | Extended Verify Sectors                  |
+| -      | 45h | Lock/Unlock Drive                        |
+| -      | 46h | Eject Media                             |
+| -      | 47h | Extended Seek                           |
+| -      | 48h | Extended Get Drive Parameters            |
+| -      | 49h | Extended Get Media Change Status         |
+| -      | 4Eh | Extended Set Hardware Configuration       |
+| 14h    |    | Serial Port Services                      |
+| -      | 00h | Serial Port Initialization                |
+| -      | 01h | Transmit Character                       |
+| -      | 02h | Receive Character                        |
+| -      | 03h | Status                                   |
+| 16h    |    | Keyboard Services                         |
+| -      | 00h | Read Character                            |
+| -      | 01h | Read Input Status                         |
+| -      | 02h | Read Keyboard Shift Status                |
+| -      | 05h | Store Keystroke in Keyboard Buffer        |
+| -      | 10h | Read Character Extended                   |
+| -
+
+      | 11h | Read Input Status Extended                |
+| -      | 12h | Read Keyboard Shift Status Extended       |
+| 17h    |    | Printer Services                          |
+| -      | 00h | Print Character to Printer                |
+| -      | 01h | Initialize Printer                        |
+| -      | 02h | Check Printer Status                      |
+| 18h    |    | Execute Cassette BASIC                    |
+| 19h    |    | After POST, used by the BIOS to load the operating system. Can be called to reboot the computer. |
+| 1Ah    | 00h | Real-Time Clock Services                   |
+| -      | 01h | Set RTC                                  |
+| -      | 02h | Read RTC Time                            |
+| -      | 03h | Set RTC Time                            |
+| -      | 04h | Read RTC Date                            |
+| -      | 05h | Set RTC Date                            |
+| -      | 06h | Set RTC Alarm                            |
+| -      | 07h | Reset RTC Alarm                          |
+
 | AH    | Service                         | Description                              |
 |-------|---------------------------------|------------------------------------------|
 | 00h   | Tape drive                      | Turn on tape drive motor                 |
