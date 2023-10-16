@@ -50,6 +50,7 @@ boot2:
     mov gs, ax
     mov ss, ax
     mov ebx, 0xb8000
+    mov ecx, 0
 
     mov esi, hello
     call print
@@ -58,10 +59,11 @@ boot2:
 
     mov esi, hello2
     call print
+
     jmp halt
 
 print:
-    pusha
+    mov ecx, 80
 .loop:
     lodsb
     or al, al
@@ -69,14 +71,18 @@ print:
     or eax, 0x0100
     mov word [ebx], ax
     add ebx, 2
+
+    sub ecx, 1
+
     jmp .loop
 .done:
-    popa
     ret
 
 newline:
-    mov word [ebx], 0x0A00
+.loop2:
+    mov word [ebx], 0x0000
     add ebx, 2
+    loop .loop2
     ret
 
 halt:
@@ -84,6 +90,7 @@ halt:
     hlt
 
 hello db "Hello, World!", 0
+
 hello2 db "How are you?", 0
 
 times 510 - ($-$$) db 0
